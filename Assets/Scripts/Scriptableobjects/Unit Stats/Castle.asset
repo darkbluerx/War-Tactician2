@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de43f970b76db3145b6d2ee594add266, type: 3}
+  m_Name: Castle
+  m_EditorClassIdentifier: 
+  pType: 4
+  associatedPrefab: {fileID: 8282788937709284141, guid: afb6cff0204d7ba4fb60b28ff3b628d3,
+    type: 3}
+  alternatePrefab: {fileID: 1295517511396850636, guid: 78a56fae9bbc40f48b587f173c79b33f,
+    type: 3}
+  attackType: 0
+  targetType: 1
+  attackRatio: 1
+  damagePerAttack: 5
+  attackRange: 3
+  hitPoints: 500
+  speed: 5
