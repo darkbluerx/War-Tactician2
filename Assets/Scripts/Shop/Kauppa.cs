@@ -25,7 +25,9 @@ public class Kauppa : MonoBehaviour
     [Header("Unit Buttons")]
     public UnitButton[] unitButtons;
     public Button[] myPurchaseButtons;
+    [Space]
 
+    [Header("GamePlay Buttons")]
     public Button[] gamePlayButtons; //size 5,
     public GameObject[] gamePlayButtonsGameObjects; //size 5,
 
@@ -61,8 +63,7 @@ public class Kauppa : MonoBehaviour
             int buttonIndex = i; // Capture the index in a local variable
             myPurchaseButtons[i].onClick.RemoveAllListeners();
             myPurchaseButtons[i].onClick.AddListener(() => PurchaseUnit(buttonIndex));
-        }
-        
+        } 
     }
 
     public void AddMoney()
@@ -129,14 +130,14 @@ public class Kauppa : MonoBehaviour
         }
     }
 
-
     public void LoadUnitInffos() //Load the unit info to the buttons: images, names and costs
     {
         for (int i = 0; i < buttonInffos.Length; i++)
         {
             unitButtons[i].unitNameText.text = buttonInffos[i].unitName;
             unitButtons[i].unitCostText.text = buttonInffos[i].unitCost.ToString();
-            unitButtons[i].buttonImage.sprite = buttonInffos[i].unitPicture;
+            unitButtons[i].backgroundImage.sprite = buttonInffos[i].backgroundPicture;
+            unitButtons[i].unitImage.sprite = buttonInffos[i].unitPicture;
         }
     }
 }

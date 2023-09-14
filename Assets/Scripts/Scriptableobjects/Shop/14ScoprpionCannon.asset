@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae1ded1881734e4382eb467b238fe8b, type: 3}
   m_Name: 14ScoprpionCannon
   m_EditorClassIdentifier: 
-  unitPicture: {fileID: 21300000, guid: 644badb5864e71c4cb5f2a0054130910, type: 3}
+  unitPicture: {fileID: 21300000, guid: 8408d9f27ec829545ac0229974a4a9b7, type: 3}
+  backgroundPicture: {fileID: 21300000, guid: a3a80bf2d9abb9e46b29c2607dd6ae17, type: 3}
   unitCost: 150
   unitName: Scoprpion Cannon

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae1ded1881734e4382eb467b238fe8b, type: 3}
   m_Name: 6HeavyGuard
   m_EditorClassIdentifier: 
-  unitType: 0
-  unitPicture: {fileID: 21300000, guid: 644badb5864e71c4cb5f2a0054130910, type: 3}
+  unitPicture: {fileID: 21300000, guid: bcacc3fcbed96544e99cde300d7097d3, type: 3}
+  backgroundPicture: {fileID: 21300000, guid: a6de73764f47a8d44b28dbfbae8ffd52, type: 3}
   unitCost: 100
   unitName: Heavy Guard

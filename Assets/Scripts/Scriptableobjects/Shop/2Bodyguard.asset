@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae1ded1881734e4382eb467b238fe8b, type: 3}
   m_Name: 2Bodyguard
   m_EditorClassIdentifier: 
-  unitType: 0
-  unitPicture: {fileID: 21300000, guid: 644badb5864e71c4cb5f2a0054130910, type: 3}
+  unitPicture: {fileID: 21300000, guid: 517a929c0fff2dd4ba9900cb09b03ba1, type: 3}
+  backgroundPicture: {fileID: 21300000, guid: a3a80bf2d9abb9e46b29c2607dd6ae17, type: 3}
   unitCost: 75
   unitName: Bodyguard

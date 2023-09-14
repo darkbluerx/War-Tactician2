@@ -10,12 +10,13 @@ using static UnityEditor.Progress;
 public class UnitButton : MonoBehaviour
 {
     public TMP_Text unitNameText;
-    public Image buttonImage;
+    public Image backgroundImage;
+    public Image unitImage;
 
     public TMP_Text unitCostText;
 
     [SerializeField] Button button;
-    [SerializeField] Image selectedImage;
+    public Image selectedImage;
 
     public UnityEvent buttonEvent;
 
@@ -43,5 +44,3 @@ public class UnitButton : MonoBehaviour
         selectedImage.enabled = true;
     }
 }
-
-
