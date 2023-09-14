@@ -15,4 +15,4 @@ MonoBehaviour:
   unitPicture: {fileID: 21300000, guid: 9e4d6eb9e21cb864486df0ed697cb948, type: 3}
   backgroundPicture: {fileID: 21300000, guid: 276726de27eae224b814f4998f3354e5, type: 3}
   unitCost: 100
-  unitName: The Hand-Gonne
+  unitName: Scout
