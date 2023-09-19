@@ -31,7 +31,7 @@ namespace CastleDefence
         public event EventHandler OnAttackAnimation;
         public event EventHandler OnDeathAnimation;
       
-        public event EventHandler OnAudioEvent;
+        //public event EventHandler OnAudioEvent;
 
         //data coming from the PlaceableData
         private float speed;

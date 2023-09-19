@@ -34,7 +34,7 @@ public class UnitShop : MonoBehaviour
     [SerializeField] TMP_Text currentMoneyText;
 
     [Header("Player 2 Cash")]
-    [SerializeField] float player2Money = 1000f;
+    //[SerializeField] float player2Money = 1000f;
     [SerializeField] TMP_Text currentMoney2Text;
 
 

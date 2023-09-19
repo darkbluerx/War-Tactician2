@@ -16,7 +16,7 @@ namespace CastleDefence
 
         [SerializeField] Vector3 playerSpawnPoint = new Vector3(0, 2, 28);
 
-        public static event EventHandler OnAnyUnitSpawned;
+        //public static event EventHandler OnAnyUnitSpawned;
 
         private void Awake()
         {

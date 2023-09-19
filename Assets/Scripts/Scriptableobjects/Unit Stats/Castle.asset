@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Castle
   m_EditorClassIdentifier: 
   pType: 4
-  associatedPrefab: {fileID: 8282788937709284141, guid: afb6cff0204d7ba4fb60b28ff3b628d3,
+  associatedPrefab: {fileID: 1652178360213166494, guid: c5c63d7b61fdb454f979ea6dba89616d,
     type: 3}
-  alternatePrefab: {fileID: 1295517511396850636, guid: 78a56fae9bbc40f48b587f173c79b33f,
+  alternatePrefab: {fileID: 7054255866246900554, guid: 52c42d4da32596d40a1812948a4ac4de,
     type: 3}
   attackType: 0
   targetType: 1

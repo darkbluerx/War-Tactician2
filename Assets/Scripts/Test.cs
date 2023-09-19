@@ -10,26 +10,26 @@ public class Test : MonoBehaviour
 {
 
 
-    private void Awake()
-    {
-        Create();
-    }
+    //private void Awake()
+    //{
+    //    Create();
+    //}
 
-    //float playerMoneyFactor2;
-
-
-    public TroopRecruitmentPricesSO Create()
-    {
-        TroopRecruitmentPricesSO Instance = ScriptableObject.CreateInstance<TroopRecruitmentPricesSO>();
-        return CopyBaseValues(Instance);
-    }
+    ////float playerMoneyFactor2;
 
 
-    public T CopyBaseValues<T>(T Instance) where T : TroopRecruitmentPricesSO
-    {
-        Instance.playerMoneyFactor = Instance.playerMoneyFactor;
-        ++Instance.playerMoneyFactor;
-        Debug.Log("Test " + Instance.playerMoneyFactor);
-        return Instance;
-    }
+    //public TroopRecruitmentPricesSO Create()
+    //{
+    //    TroopRecruitmentPricesSO Instance = ScriptableObject.CreateInstance<TroopRecruitmentPricesSO>();
+    //    return CopyBaseValues(Instance);
+    //}
+
+
+    //public T CopyBaseValues<T>(T Instance) where T : TroopRecruitmentPricesSO
+    //{
+    //    Instance.playerMoneyFactor = Instance.playerMoneyFactor;
+    //    ++Instance.playerMoneyFactor;
+    //    Debug.Log("Test " + Instance.playerMoneyFactor);
+    //    return Instance;
+    //}
 }

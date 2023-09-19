@@ -12,9 +12,7 @@ namespace CastleDefence
     {
         public static GameManager Instance { get; private set; } //singleton
 
-       
-
-        public event EventHandler OnSittingAnimation;
+        //public event EventHandler OnSittingAnimation;
         public event EventHandler OnAngryAnimation;
         public event EventHandler OnClappingAnimation;
         public event EventHandler OnRallyingAnimation;
@@ -29,7 +27,8 @@ namespace CastleDefence
         [SerializeField] AudioSource source;
         [Space]
 
-        [SerializeField] GameObject shopPanel;
+        [SerializeField] GameObject gameplayCanvas;
+        public GameObject shopCanvas;
 
         private void Awake()
         {
@@ -44,14 +43,14 @@ namespace CastleDefence
 
         private void Start()
         {
-            //Time.timeScale = 1.0f;
+            Time.timeScale = 0f;
             backGroundMusicAudioEvent.Play(source);
 
             var randomAnimation2 = UnityEngine.Random.Range(0, 2); 
             if (randomAnimation2 == 1) OnClappingAnimation?.Invoke(this, EventArgs.Empty); //change animation if this is 1
         }
 
-        public void Replay()
+        public void Replay() //Replay- and Back Button
         {
             SceneManager.LoadScene(0); //load menu
         }
@@ -65,12 +64,11 @@ namespace CastleDefence
 
             //Time.timeScale = 0f;
             UIManager.Instance.ShowGameOverUI();
-            shopPanel.SetActive(false); //close shopPanel (UI)
+            gameplayCanvas.SetActive(false); //close shopPanel (UI)
         }
 
         public void WinGame()
         {
-           
             source.Stop(); //stop backgroundMusic
             winAudioEvent.Play(source);
 
@@ -81,7 +79,22 @@ namespace CastleDefence
 
             //Time.timeScale = 0f;
             UIManager.Instance.ShowWinGameUI();
-            shopPanel.SetActive(false); //close shopPanel (UI)
+            gameplayCanvas.SetActive(false); //close shopPanel (UI)
+        }
+
+        //ShopPanel
+        public void PlayGame() //Battle Button
+        {
+            gameplayCanvas.SetActive(true);
+            shopCanvas.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+        public void Shopping()
+        {
+            Time.timeScale = 0f;
+            shopCanvas.SetActive(true);
+            gameplayCanvas.SetActive(false);
         }
     }
 }

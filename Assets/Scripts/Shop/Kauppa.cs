@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using System.Diagnostics;
+using System;
 //using UnityEngine.UIElements;
 
 public class Kauppa : MonoBehaviour
@@ -24,25 +26,36 @@ public class Kauppa : MonoBehaviour
 
     [Header("Unit Buttons")]
     public UnitButton[] unitButtons;
+    public UnitButton[] unitButtons2;
+    public UnitButton[] unitButtons3;
+
     public Button[] myPurchaseButtons;
+    public Image[] myPurchaseButtonsImages;
     [Space]
 
     [Header("GamePlay Buttons")]
     public Button[] gamePlayButtons; //size 5,
     public GameObject[] gamePlayButtonsGameObjects; //size 5,
 
-    public UnityEvent unitButtonEvent;
+    //public UnityEvent unitButtonEvent;
 
- 
+    //bool isClickedFirstime = false;
+    bool is2TierPurchased = false;
+
     private void Awake()
     {
         if (Instance != null) //Singleton pattern
         {
-            Debug.LogError("There's more than one Kauppa! " + transform + " - " + Instance);
+            //Debug.LogError("There's more than one Kauppa! " + transform + " - " + Instance);
             Destroy(gameObject);
             return;
         }
         Instance = this;
+
+        Hide2TierUnits(); //Hide the 2nd tier units. You have to buy the 1st tier units first
+        Hide3TierUnits(); //Hide the 3rd tier units. You have to buy the 2nd tier units first
+
+        //gameplayCanvas.SetActive(false);
     }
 
     private void OnEnable()
@@ -56,14 +69,36 @@ public class Kauppa : MonoBehaviour
         UpdateMoneyText();
         LoadUnitInffos();
         //CheckPurchaseable();
-
+        
         //Purchase button presses
         for (int i = 0; i < myPurchaseButtons.Length; i++)
         {
             int buttonIndex = i; // Capture the index in a local variable
             myPurchaseButtons[i].onClick.RemoveAllListeners();
             myPurchaseButtons[i].onClick.AddListener(() => PurchaseUnit(buttonIndex));
-        } 
+        }
+    }
+
+    private void Hide2TierUnits()
+    {
+        for (int i = 0; i < myPurchaseButtons.Length; i++)
+        {
+            if (i == 1 || i == 4 || i == 7 || i == 10 || i == 13)
+            {
+                myPurchaseButtons[i].interactable = false;
+            }
+        }
+    }
+
+    private void Hide3TierUnits()
+    {
+        for (int i = 0; i < myPurchaseButtons.Length; i++)
+        {
+            if (i == 2 || i == 5 || i == 8 || i == 11 || i == 14)
+            {
+                myPurchaseButtons[i].interactable = false;
+            }
+        }
     }
 
     public void AddMoney()
@@ -77,17 +112,45 @@ public class Kauppa : MonoBehaviour
     {
         for (int i = 0; i < buttonInffos.Length; i++)
         {
+           
             if (player1Money >= buttonInffos[i].unitCost)
             {
-                myPurchaseButtons[i].interactable = true;
+                myPurchaseButtons[buttonIndex].interactable = false;
 
-                //myPurchaseButtons[buttonIndex].interactable = false;
-                unitButtonEvent.Invoke();
+                HasBeenPurchased(buttonIndex);
+                Unlock2TierUnits(buttonIndex);
+                if (is2TierPurchased)
+                {
+                    Unlock3TierUnits(buttonIndex);
+                }
+
             }
             else
             {
                 myPurchaseButtons[i].interactable = false;
+                //HasBeenPurchased(buttonIndex);
             }
+        }
+    }
+    bool HasBeenPurchased(int buttonIndex) //Highlight image of the purchase
+    {
+        myPurchaseButtonsImages[buttonIndex].enabled = true;
+        return true;
+    }
+
+    private void Unlock2TierUnits(int buttonIndex)
+    {
+        if (buttonIndex == 0 || buttonIndex == 3 || buttonIndex == 6 || buttonIndex == 9 || buttonIndex == 12)
+        {
+            myPurchaseButtons[buttonIndex + 1].interactable = true;
+            is2TierPurchased = true;
+        }
+    }
+    private void Unlock3TierUnits(int buttonIndex)
+    {
+        if (buttonIndex == 1 || buttonIndex == 4 || buttonIndex == 7 || buttonIndex == 10 || buttonIndex == 13)
+        {
+            myPurchaseButtons[buttonIndex + 1].interactable = true;
         }
     }
 
@@ -100,6 +163,8 @@ public class Kauppa : MonoBehaviour
     {
         if (player1Money >= buttonInffos[buttonIndex].unitCost)
         {
+            //isClickedFirstime = true;
+            //gamePlayButtons[buttonIndex].enabled = false;
             player1Money -= buttonInffos[buttonIndex].unitCost;
 
             UpdateMoneyText();
@@ -107,15 +172,6 @@ public class Kauppa : MonoBehaviour
             UnlockUnit(buttonIndex);
         }
     }
-
-
-    //etsi json harjoitus projekteista ja katso läpi. katso vielä youtubesta tai kysy Chat Gtp:ltä miten tämä tehdään
-    //jos ostat yksikön, sen buttinIndeksi tallennetaan tai yksikkö vastaava string "Knight"
-
-    //tämän perusteella  unit prefabbia kutsutaan ja se instansoidaan/ asetetaan Gameplay Sceneen canvasiin
-    //GamePlay scenessä on pelaajaa kohti 5 nappia, eka nappi vastaa Footmen jne. Tämän tarkoitus on yksinkertaistaa toimintaa?
-    //tämän jälkeen UnitManageri kutsuu unitin joka on nappulassa eventillä?, tämä toiminto ei välitä mikä unit on nappulassa, vaan kutsuu sen mikä siinä on
-
 
     public void UnlockUnit(int buttonIndex)
     {
@@ -125,7 +181,7 @@ public class Kauppa : MonoBehaviour
 
         if (gamePlayButtonIndex >= 0 && gamePlayButtonIndex < gamePlayButtons.Length)
         {
-            //gamePlayButtons[gamePlayButtonIndex].interactable = true;
+            //gamePlayButtons[gamePlayButtonIndex].interactable = false;
             gamePlayButtonsGameObjects[gamePlayButtonIndex].SetActive(true);    
         }
     }
@@ -139,5 +195,9 @@ public class Kauppa : MonoBehaviour
             unitButtons[i].backgroundImage.sprite = buttonInffos[i].backgroundPicture;
             unitButtons[i].unitImage.sprite = buttonInffos[i].unitPicture;
         }
-    }
+    }  
+
+    //siirretään myöhemmin Gamemanageriin todennäköisesti
+
+   
 }

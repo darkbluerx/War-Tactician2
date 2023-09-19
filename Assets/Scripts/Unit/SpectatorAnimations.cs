@@ -21,7 +21,7 @@ namespace CastleDefence
 
         private void OnEnable()
         {
-            gameManager.OnSittingAnimation += UnitAnimations_OnSitting;
+            //gameManager.OnSittingAnimation += UnitAnimations_OnSitting;
             gameManager.OnAngryAnimation += UnitAnimations_OnAngry;
             gameManager.OnClappingAnimation += UnitAnimations_OnClapping;
             gameManager.OnRallyingAnimation += UnitAnimations_OnRallying;
