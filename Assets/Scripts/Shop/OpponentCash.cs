@@ -14,7 +14,7 @@ public class OpponentCash : MonoBehaviour
     
     [Header("Opponent Cash")]
     [SerializeField] float opponentMoney = 300f;
-    [SerializeField] TMP_Text currentopponentMoneyText;
+    //[SerializeField] TMP_Text currentopponentMoneyText;
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class OpponentCash : MonoBehaviour
 
     private void UpdateopponentMoneyText()
     {
-        currentopponentMoneyText.text = opponentMoney.ToString();
+        //currentopponentMoneyText.text = opponentMoney.ToString();
     }
 
     public void GetMoney() //Reward for killing troops
@@ -69,7 +69,7 @@ public class OpponentCash : MonoBehaviour
             IsEnemy = true;
             UnitManager.Instance.BuySpearButton();
 
-            opponentMoney -= unitCost.spearmanCost;
+            opponentMoney -= unitCost.lancerCost;
             UpdateopponentMoneyText();
         }
 
@@ -77,7 +77,7 @@ public class OpponentCash : MonoBehaviour
         {
             IsEnemy = true;
             UnitManager.Instance.BuyTankButton();
-            opponentMoney -= unitCost.tankCost;
+            opponentMoney -= unitCost.shieldmanCost;
             UpdateopponentMoneyText();
         }
 
@@ -85,7 +85,7 @@ public class OpponentCash : MonoBehaviour
         {
             IsEnemy = true;
             UnitManager.Instance.BuyRangerButton();
-            opponentMoney -= unitCost.rangerCost;
+            opponentMoney -= unitCost.bowmanCost;
             UpdateopponentMoneyText();
         }
 

@@ -122,7 +122,7 @@ public class UnitShop : MonoBehaviour
             UpdateMoneyText();
 
             lancerImage.color = Color.gray;
-            bodyguardImage.color = Color.green;
+            //bodyguardImage.color = Color.green;
 
             bodyguardButton.enabled = false;
             knightButton.gameObject.SetActive(true);

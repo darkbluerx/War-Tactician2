@@ -26,18 +26,21 @@ public class Kauppa : MonoBehaviour
 
     [Header("Unit Buttons")]
     public UnitButton[] unitButtons;
-    public UnitButton[] unitButtons2;
-    public UnitButton[] unitButtons3;
 
     public Button[] myPurchaseButtons;
     public Image[] myPurchaseButtonsImages;
+    [Space]
+
+
+    [Header("Buttons")]
+    public GameplayButton[] gameplayUnitButtons;
     [Space]
 
     [Header("GamePlay Buttons")]
     public Button[] gamePlayButtons; //size 5,
     public GameObject[] gamePlayButtonsGameObjects; //size 5,
 
-    //public UnityEvent unitButtonEvent;
+    public UnityEvent CallUnlockUnit;
 
     //bool isClickedFirstime = false;
     bool is2TierPurchased = false;
@@ -118,17 +121,18 @@ public class Kauppa : MonoBehaviour
                 myPurchaseButtons[buttonIndex].interactable = false;
 
                 HasBeenPurchased(buttonIndex);
+                //LoadUnitInffos2(buttonIndex);/////////////////////////
+
                 Unlock2TierUnits(buttonIndex);
                 if (is2TierPurchased)
                 {
                     Unlock3TierUnits(buttonIndex);
                 }
-
             }
             else
             {
                 myPurchaseButtons[i].interactable = false;
-                //HasBeenPurchased(buttonIndex);
+                HasBeenPurchased(buttonIndex); //Highlight image of the purchase if you have only 50 money
             }
         }
     }
@@ -146,6 +150,7 @@ public class Kauppa : MonoBehaviour
             is2TierPurchased = true;
         }
     }
+
     private void Unlock3TierUnits(int buttonIndex)
     {
         if (buttonIndex == 1 || buttonIndex == 4 || buttonIndex == 7 || buttonIndex == 10 || buttonIndex == 13)
@@ -169,7 +174,11 @@ public class Kauppa : MonoBehaviour
 
             UpdateMoneyText();
             CheckPurchaseable(buttonIndex);
+
+            
             UnlockUnit(buttonIndex);
+            //LoadUnitInffos2(buttonIndex);
+            
         }
     }
 
@@ -182,8 +191,40 @@ public class Kauppa : MonoBehaviour
         if (gamePlayButtonIndex >= 0 && gamePlayButtonIndex < gamePlayButtons.Length)
         {
             //gamePlayButtons[gamePlayButtonIndex].interactable = false;
-            gamePlayButtonsGameObjects[gamePlayButtonIndex].SetActive(true);    
+            gamePlayButtonsGameObjects[gamePlayButtonIndex].SetActive(true);
+            
+            LoadUnitInffos2(buttonIndex);
         }
+    }
+
+    public void LoadUnitInffos2(int buttonIndex) //Load the unit info to the buttons: images, names and costs
+    {
+        //jos painat nappulaa 0
+
+        for (int i = 0; i < buttonInffos.Length; i++)
+        {
+            if (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)
+            {
+                //Debug.Log("buttonIndex: " + buttonIndex);
+
+                gameplayUnitButtons[0].unitNameText.text = buttonInffos[buttonIndex].unitName;
+                gameplayUnitButtons[0].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
+                gameplayUnitButtons[0].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
+                gameplayUnitButtons[0].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
+            }
+
+
+            if(buttonIndex == 3 || buttonIndex == 4 || buttonIndex == 5)
+            {
+                //Debug.Log("buttonIndex: " + buttonIndex);
+
+                gameplayUnitButtons[1].unitNameText.text = buttonInffos[buttonIndex].unitName;
+                gameplayUnitButtons[1].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
+                gameplayUnitButtons[1].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
+                gameplayUnitButtons[1].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
+            }
+        }
+
     }
 
     public void LoadUnitInffos() //Load the unit info to the buttons: images, names and costs
@@ -195,9 +236,5 @@ public class Kauppa : MonoBehaviour
             unitButtons[i].backgroundImage.sprite = buttonInffos[i].backgroundPicture;
             unitButtons[i].unitImage.sprite = buttonInffos[i].unitPicture;
         }
-    }  
-
-    //siirretään myöhemmin Gamemanageriin todennäköisesti
-
-   
+    }    
 }

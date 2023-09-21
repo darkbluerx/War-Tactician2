@@ -62,7 +62,7 @@ namespace CastleDefence
 
             OnAngryAnimation?.Invoke(this, EventArgs.Empty);
 
-            //Time.timeScale = 0f;
+            Time.timeScale = 0f;
             UIManager.Instance.ShowGameOverUI();
             gameplayCanvas.SetActive(false); //close shopPanel (UI)
         }

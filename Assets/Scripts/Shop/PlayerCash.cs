@@ -14,9 +14,6 @@ namespace CastleDefence
     {
         public static PlayerCash Instance { get; private set; } //Singleton
 
-        //[SerializeField] AudioEvent getMoney;
-        //[SerializeField] AudioSource source;
-
         [SerializeField] UnitCostSO unitCost;
 
         [Header("Buttons")]
@@ -107,20 +104,20 @@ namespace CastleDefence
 
         public void CostSpearman()
         {
-            if (playerMoney >= unitCost.spearmanCost)
+            if (playerMoney >= unitCost.lancerCost)
             {
                 UnitManager.Instance.BuySpearButton(); //Instantiate unit
-                playerMoney -= unitCost.spearmanCost;
+                playerMoney -= unitCost.lancerCost;
                 UpdateMoneyText();           
             }
         }
 
         private void CostTank()
         {
-            if (playerMoney >= unitCost.tankCost)
+            if (playerMoney >= unitCost.shieldmanCost)
             {
                 UnitManager.Instance.BuyTankButton(); //Instantiate unit
-                playerMoney -= unitCost.tankCost;
+                playerMoney -= unitCost.shieldmanCost;
                 UpdateMoneyText();
                 //OnBuyTank?.Invoke(this, EventArgs.Empty);
             }
@@ -128,10 +125,10 @@ namespace CastleDefence
 
         private void CostRanger()
         {
-            if (playerMoney >= unitCost.rangerCost)
+            if (playerMoney >= unitCost.bowmanCost)
             {
                 UnitManager.Instance.BuyRangerButton(); //Instantiate unit
-                playerMoney -= unitCost.rangerCost;
+                playerMoney -= unitCost.bowmanCost;
                 UpdateMoneyText();
                //OnBuyRanger?.Invoke(this, EventArgs.Empty);
             }
