@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
-using System.Diagnostics;
-using System;
-//using UnityEngine.UIElements;
 
-public class Kauppa : MonoBehaviour
+public class BattleTroopReqruitments2 : MonoBehaviour
 {
-    public static Kauppa Instance { get; private set; }
+    public static BattleTroopReqruitments2 Instance { get; private set; }
 
     public int player1Money;
     public TMP_Text player1MoneyText;
@@ -71,7 +66,7 @@ public class Kauppa : MonoBehaviour
         UpdateMoneyText();
         LoadUnitInffos();
         //CheckPurchaseable();
-        
+
         //Purchase button presses
         for (int i = 0; i < myPurchaseButtons.Length; i++)
         {
@@ -114,7 +109,7 @@ public class Kauppa : MonoBehaviour
     {
         for (int i = 0; i < buttonInffos.Length; i++)
         {
-           
+
             if (player1Money >= buttonInffos[i].unitCost)
             {
                 myPurchaseButtons[buttonIndex].interactable = false;
@@ -191,7 +186,7 @@ public class Kauppa : MonoBehaviour
         }
     }
 
-    public void LoadButtonInffos(int buttonIndex) //Load troop information to the buttons on the Gameplay canvas: images, names and costs
+    private void LoadButtonInffos(int buttonIndex) //Load troop information to the buttons on the Gameplay canvas: images, names and costs
     {
         for (int i = 0; i < buttonInffos.Length; i++)
         {
@@ -204,7 +199,7 @@ public class Kauppa : MonoBehaviour
                 gameplayUnitButtons[0].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
             }
 
-            if(buttonIndex == 3 || buttonIndex == 4 || buttonIndex == 5)
+            if (buttonIndex == 3 || buttonIndex == 4 || buttonIndex == 5)
             {
                 gameplayUnitButtons[1].unitNameText.text = buttonInffos[buttonIndex].unitName;
                 gameplayUnitButtons[1].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
@@ -247,5 +242,7 @@ public class Kauppa : MonoBehaviour
             unitButtons[i].backgroundImage.sprite = buttonInffos[i].backgroundPicture;
             unitButtons[i].unitImage.sprite = buttonInffos[i].unitPicture;
         }
-    }    
+    }
 }
+
+
