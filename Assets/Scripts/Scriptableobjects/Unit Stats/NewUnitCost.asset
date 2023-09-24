@@ -14,7 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMoneyFactor: 3
   opponentMoneyFactor: 3
-  spearmanCost: 40
-  tankCost: 55
-  rangerCost: 80
-  killMoney: 30
+  lancerCost: 30
+  bodyguardCost: 35
+  knightCost: 40
+  shieldmanCost: 30
+  mediumShielmanCost: 35
+  heavyGuardCost: 40
+  bowmanCost: 30
+  crosbowHunterCost: 35
+  handGonneCost: 40
+  cannonCost: 50
+  scorpionCannonCost: 55
+  lightningCannonCost: 60
+  killMoney: 15

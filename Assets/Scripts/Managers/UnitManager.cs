@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using static CastleDefence.Placeable;
@@ -89,8 +88,6 @@ namespace CastleDefence
             SetupPlaceable(playersCastle, castlePData, Placeable.Faction.Player);
             SetupPlaceable(opponentCastle, castlePData, Placeable.Faction.Opponent);
         }
-
- 
         private void FixedUpdate()
         {
             UpdateUnitStates();
@@ -98,7 +95,6 @@ namespace CastleDefence
 
         private void UpdateUnitStates()
         {
-
             if (gameOver) return;
 
             ThinkingPlaceable p;
@@ -160,74 +156,27 @@ namespace CastleDefence
             }
         }
 
-        public void BuySpearButton() //PlayerCash/OpponentCash hire troops
-        {
-            if(OpponentCash.Instance.Enemy())
-            {
-                BuyOpponentSpearman(oSpearman, spearmanData, Placeable.Faction.Opponent);
-            }
-            else
-            {
-                BuySpearman(pSpearman, spearmanData, Placeable.Faction.Player);
-            }
-        }
+        public void BuySpearButton() => BuyUnit(pSpearman, spearmanData, Placeable.Faction.Player);
+        public void BuyTankButton() => BuyUnit(pTank, tankData, Placeable.Faction.Player);
+        public void BuyRangerButton() => BuyUnit(pRanger, rangerData, Placeable.Faction.Player);
 
-        public void BuyTankButton() //PlayerCash/OpponentCash hire troops
+        private void BuyUnit(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
         {
             if (OpponentCash.Instance.Enemy())
+                go = (go == pSpearman) ? oSpearman : (go == pTank) ? oTank : oRanger;
+
+            if (go == pSpearman || go == pTank || go == pRanger)
             {
-                BuyOpponentTank(oTank, tankData, Placeable.Faction.Opponent);
+                GameObject clone = Instantiate(go,playerSpawn, Quaternion.identity);
+                SetupPlaceable(clone, pDataRef, pFaction);
             }
             else
             {
-                BuyTank(pTank, tankData, Placeable.Faction.Player);
-            }  
-        }
-
-        public void BuyRangerButton() //PlayerCash/OpponentCash hire troops
-        {
-            if (OpponentCash.Instance.Enemy())
-            {
-                BuyOpponentRanger(oRanger, rangerData, Placeable.Faction.Opponent);
+                GameObject clone = Instantiate(go, enemySpawn, Quaternion.identity);
+                SetupPlaceable(clone, pDataRef, Placeable.Faction.Opponent);
             }
-            else
-            {
-                BuyRanger(pRanger, rangerData, Placeable.Faction.Player);
-            }
-        }
-
-        private void BuySpearman(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
-        {
-            GameObject clone = Instantiate(pSpearman, playerSpawn, Quaternion.identity);
-            SetupPlaceable(clone, pDataRef, pFaction);
-        }
-
-        private void BuyTank(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
-        {
-            GameObject clone = Instantiate(pTank, playerSpawn, Quaternion.identity);
-            SetupPlaceable(clone, pDataRef, pFaction);
-        }
-        private void BuyRanger(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
-        {
-            GameObject clone = Instantiate(pRanger, playerSpawn, Quaternion.identity);
-            SetupPlaceable(clone, pDataRef, pFaction);
-        }
-
-        private void BuyOpponentSpearman(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
-        {
-            GameObject clone = Instantiate(oSpearman, enemySpawn, Quaternion.identity);
-            SetupPlaceable(clone, pDataRef, pFaction);
-        }
-
-        private void BuyOpponentTank(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
-        {
-            GameObject clone = Instantiate(oTank, enemySpawn, Quaternion.identity);
-            SetupPlaceable(clone, pDataRef, pFaction);
-        }
-        private void BuyOpponentRanger(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
-        {
-            GameObject clone = Instantiate(oRanger, enemySpawn, Quaternion.identity);
-            SetupPlaceable(clone, pDataRef, pFaction);
+            //GameObject clone = Instantiate(go, (go == pSpearman || go == oSpearman) ? enemySpawn : playerSpawn, Quaternion.identity);
+            //SetupPlaceable(clone, pDataRef, pFaction);
         }
 
         private void SetupPlaceable(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
@@ -257,8 +206,7 @@ namespace CastleDefence
                     if (pDataRef.pType == Placeable.PlaceableType.Castle)
                     {
                         ThinkingPlaceable target = null;
-                            bScript.OnDie += OnCastleDead;
-                        
+                            bScript.OnDie += OnCastleDead;                      
                     }
                     break;
             }

@@ -94,7 +94,7 @@ namespace CastleDefence
         {
             Time.timeScale = 0f;
             shopCanvas.SetActive(true);
-            gameplayCanvas.SetActive(false);
+            //gameplayCanvas.SetActive(false);
         }
     }
 }

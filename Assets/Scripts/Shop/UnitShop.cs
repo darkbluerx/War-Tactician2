@@ -12,10 +12,6 @@ public class UnitShop : MonoBehaviour
 
     [SerializeField] TroopRecruitmentPricesSO price;
 
-
-    //hae find käkyllä näppäimet ja kuvat
-    
-
     [Header("Player 1 Buttons")]
     [SerializeField] Button lancerButton;
     [SerializeField] Button bodyguardButton;
@@ -26,7 +22,6 @@ public class UnitShop : MonoBehaviour
     [SerializeField] Image lancerImage;
     [SerializeField] Image bodyguardImage;
     [SerializeField] Image knightImage;
-
     [Space]
 
     [Header("Player 1 Cash")]
@@ -36,7 +31,6 @@ public class UnitShop : MonoBehaviour
     [Header("Player 2 Cash")]
     //[SerializeField] float player2Money = 1000f;
     [SerializeField] TMP_Text currentMoney2Text;
-
 
     private void Awake()
     {
@@ -48,13 +42,6 @@ public class UnitShop : MonoBehaviour
         }
         Instance = this;
     }
-
-    private void Start()
-    {
-        Button[] buttons = GameObject.FindObjectsOfType<Button>();
-        List<GameObject> list = new List<GameObject>();
-    }
-
 
     private void OnEnable()
     {
@@ -68,8 +55,6 @@ public class UnitShop : MonoBehaviour
         bodyguardButton.onClick.AddListener(BuyBodyguard);
         knightButton.onClick.AddListener(BuyKnight);
     }
-
-    public List<ButtonInffoSO> buttonInffoSOs = new List<ButtonInffoSO>();
 
     private void BuyUnit()
     {
@@ -140,8 +125,6 @@ public class UnitShop : MonoBehaviour
         }
     }
 
-
-
     private void UpdateMoneyText()
     {
         //getMoney.Play(source);
@@ -149,22 +132,4 @@ public class UnitShop : MonoBehaviour
         currentMoneyText.text = "+Gold:" + ((int)playerMoney).ToString();
         Invoke("ColorTimer", 0.8f);
     }
-
-
-   //float playerMoneyFactor2;
-
-
-   // public T CopyBaseValues<T>(T Instance) where T : TroopRecruitmentPricesSO
-   // {
-   //     Instance.playerMoneyFactor = playerMoneyFactor2;
-   //     Debug.Log(playerMoneyFactor2);
-   //     return Instance;
-   // }
-
-    //public TroopRecruitmentPricesSO Create()
-    //{
-    //    TroopRecruitmentPricesSO Instance = ScriptableObject.CreateInstance<TroopRecruitmentPricesSO>();
-    //    return CopyBaseValues(Instance);
-    //}
-
 }
