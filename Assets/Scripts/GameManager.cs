@@ -21,6 +21,7 @@ namespace CastleDefence
         [SerializeField] AudioEvent winAudioEvent;
         [SerializeField] AudioEvent loseAudioEvent;
         [SerializeField] AudioEvent backGroundMusicAudioEvent;
+        [SerializeField] AudioEvent shopMusicAudioEvent;
 
         SpectatorAnimations specAnimations;
 
@@ -43,8 +44,9 @@ namespace CastleDefence
 
         private void Start()
         {
+            shopMusicAudioEvent.Play(source);
+
             Time.timeScale = 0f;
-            backGroundMusicAudioEvent.Play(source);
 
             var randomAnimation2 = UnityEngine.Random.Range(0, 2); 
             if (randomAnimation2 == 1) OnClappingAnimation?.Invoke(this, EventArgs.Empty); //change animation if this is 1
@@ -62,7 +64,7 @@ namespace CastleDefence
 
             OnAngryAnimation?.Invoke(this, EventArgs.Empty);
 
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             UIManager.Instance.ShowGameOverUI();
             gameplayCanvas.SetActive(false); //close shopPanel (UI)
         }
@@ -79,12 +81,14 @@ namespace CastleDefence
 
             //Time.timeScale = 0f;
             UIManager.Instance.ShowWinGameUI();
-            gameplayCanvas.SetActive(false); //close shopPanel (UI)
+            //gameplayCanvas.SetActive(false); //close shopPanel (UI)
         }
 
         //ShopPanel
         public void PlayGame() //Battle Button
         {
+            source.Stop();
+            backGroundMusicAudioEvent.Play(source);
             gameplayCanvas.SetActive(true);
             shopCanvas.SetActive(false);
             Time.timeScale = 1f;

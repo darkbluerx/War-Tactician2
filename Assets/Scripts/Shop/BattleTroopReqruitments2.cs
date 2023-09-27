@@ -7,7 +7,10 @@ public class BattleTroopReqruitments2 : MonoBehaviour
 {
     public static BattleTroopReqruitments2 Instance { get; private set; }
 
+    [Header("Player Money/Gold")]
     public int player1Money;
+    [Space]
+ 
     public TMP_Text player1MoneyText;
     [Space]
 
@@ -21,11 +24,9 @@ public class BattleTroopReqruitments2 : MonoBehaviour
 
     [Header("Unit Buttons")]
     public UnitButton[] unitButtons;
-
     public Button[] myPurchaseButtons;
     public Image[] myPurchaseButtonsImages;
     [Space]
-
 
     [Header("Buttons")]
     public GameplayButton[] gameplayUnitButtons;
@@ -53,6 +54,11 @@ public class BattleTroopReqruitments2 : MonoBehaviour
         Hide3TierUnits(); //Hide the 3rd tier units. You have to buy the 2nd tier units first
 
         //gameplayCanvas.SetActive(false);
+
+        for (int i = 0; i < gamePlayButtons.Length; i++)
+        {
+            gamePlayButtons[i].interactable = false;
+        }
     }
 
     private void OnEnable()
@@ -97,6 +103,10 @@ public class BattleTroopReqruitments2 : MonoBehaviour
             }
         }
     }
+    private void UpdateMoneyText()
+    {
+        player1MoneyText.text = "Gold " + player1Money.ToString();       
+    }
 
     public void AddMoney()
     {
@@ -129,6 +139,7 @@ public class BattleTroopReqruitments2 : MonoBehaviour
             }
         }
     }
+
     bool HasBeenPurchased(int buttonIndex) //Highlight image of the purchase
     {
         myPurchaseButtonsImages[buttonIndex].enabled = true;
@@ -152,19 +163,12 @@ public class BattleTroopReqruitments2 : MonoBehaviour
         }
     }
 
-    private void UpdateMoneyText()
-    {
-        player1MoneyText.text = "Gold:" + player1Money.ToString();
-    }
-
     public void PurchaseUnit(int buttonIndex)
     {
+        
         if (player1Money >= buttonInffos[buttonIndex].unitCost)
         {
-            //isClickedFirstime = true;
-            //gamePlayButtons[buttonIndex].enabled = false;
             player1Money -= buttonInffos[buttonIndex].unitCost;
-
             UpdateMoneyText();
             CheckPurchaseable(buttonIndex);
             UnlockUnit(buttonIndex);
@@ -172,18 +176,22 @@ public class BattleTroopReqruitments2 : MonoBehaviour
     }
 
     public void UnlockUnit(int buttonIndex)
-    {
-        //buttonGameobjects[buttonIndex].SetActive(false);
-
+    {     
         int gamePlayButtonIndex = buttonIndex / 3; // Calculate the gamePlayButtons index
 
         if (gamePlayButtonIndex >= 0 && gamePlayButtonIndex < gamePlayButtons.Length)
         {
-            //gamePlayButtons[gamePlayButtonIndex].interactable = false;
-            gamePlayButtonsGameObjects[gamePlayButtonIndex].SetActive(true);
+            gamePlayButtons[gamePlayButtonIndex].interactable = true;
+            //gamePlayButtonsGameObjects[gamePlayButtonIndex].SetActive(true);
 
             LoadButtonInffos(buttonIndex);
         }
+
+    }
+
+    private void InstantiateButton()
+    {
+        Instantiate(gamePlayButtons[0], gamePlayButtons[0].transform.position, Quaternion.identity);
     }
 
     private void LoadButtonInffos(int buttonIndex) //Load troop information to the buttons on the Gameplay canvas: images, names and costs
@@ -237,6 +245,7 @@ public class BattleTroopReqruitments2 : MonoBehaviour
     {
         for (int i = 0; i < buttonInffos.Length; i++)
         {
+            //Blue Team buttons (left side)
             unitButtons[i].unitNameText.text = buttonInffos[i].unitName;
             unitButtons[i].unitCostText.text = buttonInffos[i].unitCost.ToString();
             unitButtons[i].backgroundImage.sprite = buttonInffos[i].backgroundPicture;
@@ -244,5 +253,3 @@ public class BattleTroopReqruitments2 : MonoBehaviour
         }
     }
 }
-
-
