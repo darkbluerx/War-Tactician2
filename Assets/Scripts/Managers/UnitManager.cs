@@ -22,21 +22,27 @@ namespace CastleDefence
         [Space]
 
         [Header("Player Units")]
-        public GameObject pSpearman;
-        public GameObject pRanger;
-        public GameObject pTank;
+        public GameObject blueSpearman;
+        public GameObject blueRanger;
+        public GameObject blueTank;
+        public GameObject blueCannoneer;
+        public GameObject blueScout;
         [Space]
 
         [Header("Opponent Units")]
-        public GameObject oSpearman;
-        public GameObject oRanger;
-        public GameObject oTank;
+        public GameObject redSpearman;
+        public GameObject redRanger;
+        public GameObject redTank;
+        public GameObject redCannoneer;
+        public GameObject redScout;
         [Space]
 
         [Header("Units data")]
         public PlaceableData spearmanData;
         public PlaceableData rangerData;
         public PlaceableData tankData;
+        public PlaceableData cannoneerData;
+        public PlaceableData scoutData;
 
         [Header("Units spawn point")]
         [SerializeField] Vector3 playerSpawn, enemySpawn;
@@ -156,16 +162,20 @@ namespace CastleDefence
             }
         }
 
-        public void BuySpearButton() => BuyUnit(pSpearman, spearmanData, Placeable.Faction.Player);
-        public void BuyTankButton() => BuyUnit(pTank, tankData, Placeable.Faction.Player);
-        public void BuyRangerButton() => BuyUnit(pRanger, rangerData, Placeable.Faction.Player);
+        public void BuySpearButton() => BuyUnit(blueSpearman, spearmanData, Placeable.Faction.Player);
+        public void BuyTankButton() => BuyUnit(blueTank, tankData, Placeable.Faction.Player);
+        public void BuyRangerButton() => BuyUnit(blueRanger, rangerData, Placeable.Faction.Player);
+        public void BuyCannoneerButton() => BuyUnit(blueCannoneer, cannoneerData, Placeable.Faction.Player);
+        public void BuyScoutButton() => BuyUnit(blueScout, scoutData, Placeable.Faction.Player);
 
         private void BuyUnit(GameObject go, PlaceableData pDataRef, Placeable.Faction pFaction)
         {
             if (OpponentCash.Instance.Enemy())
-                go = (go == pSpearman) ? oSpearman : (go == pTank) ? oTank : oRanger;
+                //go = (go == blueSpearman) ? redSpearman : (go == blueTank) ? redTank : redRanger;
+                go = (go == blueSpearman) ? redSpearman : (go == blueTank) ? redTank : (go == blueRanger) ? redRanger
+                : (go == blueCannoneer) ? redCannoneer : redScout;
 
-            if (go == pSpearman || go == pTank || go == pRanger)
+            if (go == blueSpearman || go == blueTank || go == blueRanger || go == blueCannoneer || go== blueScout)
             {
                 GameObject clone = Instantiate(go,playerSpawn, Quaternion.identity);
                 SetupPlaceable(clone, pDataRef, pFaction);
@@ -175,7 +185,7 @@ namespace CastleDefence
                 GameObject clone = Instantiate(go, enemySpawn, Quaternion.identity);
                 SetupPlaceable(clone, pDataRef, Placeable.Faction.Opponent);
             }
-            //GameObject clone = Instantiate(go, (go == pSpearman || go == oSpearman) ? enemySpawn : playerSpawn, Quaternion.identity);
+            //GameObject clone = Instantiate(go, (go == blueSpearman || go == redSpearman) ? enemySpawn : playerSpawn, Quaternion.identity);
             //SetupPlaceable(clone, pDataRef, pFaction);
         }
 
