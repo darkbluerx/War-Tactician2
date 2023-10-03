@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09435866cf408324b852fb97127f7ec2, type: 3}
-  m_Name: DeahtAudioEvent
+  m_Name: CannoneerAttackAudioEvent
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: 692ced8acfdda6041b3456c17d9cf6b9, type: 3}
-  - {fileID: 8300000, guid: 7bb9ef580a1d5d34c82eca1f1fce8908, type: 3}
-  - {fileID: 8300000, guid: b3a0d3e48c069bf4fa7717f3bcfe4d94, type: 3}
-  Volume: 1
+  - {fileID: 8300000, guid: 9739d8b9145d7454a8c8e248569bdf4c, type: 3}
+  - {fileID: 8300000, guid: b2d6f376263e62e458850e712f721b27, type: 3}
+  - {fileID: 8300000, guid: 9b69b003e747cba469d2740f6e91d98d, type: 3}
+  - {fileID: 8300000, guid: 7afd6fc5aca7cc143814ca2ce2a31916, type: 3}
+  Volume: 0.1
   RandomizeVolume: 0
   Pitch: 1
   RandomizePitch: 1

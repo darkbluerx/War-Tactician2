@@ -15819,17 +15819,30 @@ MonoBehaviour:
   playersCastle: {fileID: 579743067}
   opponentCastle: {fileID: 1783633590}
   castlePData: {fileID: 11400000, guid: 8ed4f96992dafe845ba9d186b511458e, type: 2}
-  pSpearman: {fileID: 7098461218998804697, guid: 8be7ff620508b5e4facc17519cda1e52,
+  blueSpearman: {fileID: 7098461218998804697, guid: 8be7ff620508b5e4facc17519cda1e52,
     type: 3}
-  pRanger: {fileID: 6535909937771086189, guid: ca682c2bb3476b1419d558eedf348546, type: 3}
-  pTank: {fileID: 6331082539019949834, guid: 2b736879408fd3345a7266cd62175af9, type: 3}
-  oSpearman: {fileID: 2919880673710951542, guid: ea919985c5fae8c409ed893b746a8940,
+  blueRanger: {fileID: 6535909937771086189, guid: ca682c2bb3476b1419d558eedf348546,
     type: 3}
-  oRanger: {fileID: 8661004377831935430, guid: 22ae543cc55f2024a818adb442541b6a, type: 3}
-  oTank: {fileID: 3171835968271264275, guid: 27abc01c6768b4a4da9b66e094d0211d, type: 3}
+  blueTank: {fileID: 6331082539019949834, guid: 2b736879408fd3345a7266cd62175af9,
+    type: 3}
+  blueCannoneer: {fileID: 3000518783360864675, guid: 514276204bf769547acfb885a115790e,
+    type: 3}
+  blueScout: {fileID: 6331082539019949834, guid: e5b5fadf6dc59b14192e15d47406b113,
+    type: 3}
+  redSpearman: {fileID: 2919880673710951542, guid: ea919985c5fae8c409ed893b746a8940,
+    type: 3}
+  redRanger: {fileID: 8661004377831935430, guid: 22ae543cc55f2024a818adb442541b6a,
+    type: 3}
+  redTank: {fileID: 3171835968271264275, guid: 27abc01c6768b4a4da9b66e094d0211d, type: 3}
+  redCannoneer: {fileID: 5854726863700180608, guid: 77f5dc84f3064454f982f472b5272818,
+    type: 3}
+  redScout: {fileID: 3171835968271264275, guid: a0b5d8483f3ba244eb31dc6206863451,
+    type: 3}
   spearmanData: {fileID: 11400000, guid: 4314cc5a48a5e4445a45c9be5aa5929c, type: 2}
   rangerData: {fileID: 11400000, guid: db8ade1aa03e8f14d9b96e6b001dee0d, type: 2}
   tankData: {fileID: 11400000, guid: 8bb050fea59b6f744ae76a12b78dd132, type: 2}
+  cannoneerData: {fileID: 11400000, guid: 6ad12b7a004791946963da485f8fc7ad, type: 2}
+  scoutData: {fileID: 11400000, guid: 17429185cef8b7a439977be572b787ae, type: 2}
   playerSpawn: {x: 0, y: 0, z: 17}
   enemySpawn: {x: 0, y: 0, z: -17}
 --- !u!1 &1681129923319664386
@@ -26324,6 +26337,8 @@ MonoBehaviour:
   spearmanButton: {fileID: 1423252941}
   tankButton: {fileID: 1782445090}
   rangerButton: {fileID: 1416274876}
+  cannoneerButton: {fileID: 1935369374}
+  scoutButton: {fileID: 1810054337}
   playerMoney: 300
   currentMoneyText: {fileID: 6767726847954162066}
 --- !u!222 &5896948055988421533

@@ -15,6 +15,8 @@ namespace CastleDefence
         public Button spearmanButton;
         public Button tankButton;
         public Button rangerButton;
+        public Button cannoneerButton;
+        public Button scoutButton;
 
         [Header("Player Cash")]
         [SerializeField] float playerMoney = 300f;
@@ -37,6 +39,8 @@ namespace CastleDefence
             spearmanButton.onClick.AddListener(() => CostUnit(unitCost.lancerCost, UnitManager.Instance.BuySpearButton));
             tankButton.onClick.AddListener(() => CostUnit(unitCost.shieldmanCost, UnitManager.Instance.BuyTankButton));
             rangerButton.onClick.AddListener(() => CostUnit(unitCost.bowmanCost, UnitManager.Instance.BuyRangerButton));
+            cannoneerButton.onClick.AddListener(() => CostUnit(unitCost.cannonCost, UnitManager.Instance.BuyCannoneerButton));
+            scoutButton.onClick.AddListener(() => CostUnit(unitCost.scoutCost, UnitManager.Instance.BuyScoutButton));
         }
 
         private void FixedUpdate()

@@ -30,6 +30,10 @@ public class UnitCostSO : ScriptableObject
     public float lightningCannonCost = 60;
     [Space]
 
+    public float scoutCost = 20;
+    public float ninjaCost = 25;
+    public float samuraiCost = 30;
+
     [Header("Reward for killing troops")]
     public float killMoney = 15f;
 }

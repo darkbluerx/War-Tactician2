@@ -10,20 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de43f970b76db3145b6d2ee594add266, type: 3}
-  m_Name: Tank
+  m_Name: Lancer
   m_EditorClassIdentifier: 
   pType: 0
-  associatedPrefab: {fileID: 4826606929307655142, guid: 50de3a5dc32bb604cba9596b0a6079dd,
+  associatedPrefab: {fileID: 807769164021483063, guid: ac2f37f6b554a6b47812f00850ff6473,
     type: 3}
-  alternatePrefab: {fileID: 4826606929307655142, guid: 67b35c09d12c0044d9bc7b204c4a976f,
+  alternatePrefab: {fileID: 807769164021483063, guid: 8b19d7577e963a940bfde0e7e6a18a7f,
     type: 3}
   attackType: 0
   targetType: 1
-  attackRatio: 1
-  damagePerAttack: 5
+  attackRatio: 2
+  damagePerAttack: 4
   attackRange: 3
-  hitPoints: 300
-  speed: 2
-  attackAudioEvent: {fileID: 0}
-  deadthAudioEvent: {fileID: 0}
-  warcryAudioEvent: {fileID: 0}
+  hitPoints: 6
+  speed: 3.5

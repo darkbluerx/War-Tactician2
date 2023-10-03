@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de43f970b76db3145b6d2ee594add266, type: 3}
-  m_Name: Ranger
+  m_Name: Bowman
   m_EditorClassIdentifier: 
   pType: 0
   associatedPrefab: {fileID: 1057659938896314408, guid: 2842e6404cbaead45a39ba18cacf33f6,
@@ -19,8 +19,8 @@ MonoBehaviour:
     type: 3}
   attackType: 0
   targetType: 1
-  attackRatio: 1
-  damagePerAttack: 10
-  attackRange: 15
-  hitPoints: 30
-  speed: 3
+  attackRatio: 1.5
+  damagePerAttack: 2.5
+  attackRange: 10
+  hitPoints: 3
+  speed: 2.5

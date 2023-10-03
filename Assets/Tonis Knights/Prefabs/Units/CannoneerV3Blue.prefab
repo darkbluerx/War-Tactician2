@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6721127298494752531}
@@ -120,9 +120,10 @@ MonoBehaviour:
   timeToActNext: 0
   projectilePrefab: {fileID: 0}
   projectileSpawnPoint: {fileID: 0}
-  attackSoundEvent: {fileID: 0}
-  deathSoundEvent: {fileID: 0}
-  battlecrySoundEvent: {fileID: 0}
+  attackSoundEvent: {fileID: 11400000, guid: fef56f2fbb4d39e42962f84e65a7c8a4, type: 2}
+  deathSoundEvent: {fileID: 11400000, guid: 2a31192215386e44b93dd96f35cd04bb, type: 2}
+  battlecrySoundEvent: {fileID: 11400000, guid: f69a9838324ae15408efb1b12a814d0c,
+    type: 2}
   attackSource: {fileID: 0}
   deathSource: {fileID: 0}
   battlecrySource: {fileID: 0}

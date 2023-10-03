@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de43f970b76db3145b6d2ee594add266, type: 3}
+  m_Name: Scout
+  m_EditorClassIdentifier: 
+  pType: 0
+  associatedPrefab: {fileID: 4826606929307655142, guid: 50de3a5dc32bb604cba9596b0a6079dd,
+    type: 3}
+  alternatePrefab: {fileID: 4826606929307655142, guid: 67b35c09d12c0044d9bc7b204c4a976f,
+    type: 3}
+  attackType: 0
+  targetType: 1
+  attackRatio: 1
+  damagePerAttack: 5
+  attackRange: 3
+  hitPoints: 300
+  speed: 2
+  attackAudioEvent: {fileID: 0}
+  deadthAudioEvent: {fileID: 0}
+  warcryAudioEvent: {fileID: 0}
