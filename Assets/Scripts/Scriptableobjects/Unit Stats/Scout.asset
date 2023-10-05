@@ -20,10 +20,7 @@ MonoBehaviour:
   attackType: 0
   targetType: 1
   attackRatio: 1
-  damagePerAttack: 5
-  attackRange: 3
-  hitPoints: 300
+  damagePerAttack: 3
+  attackRange: 2.5
+  hitPoints: 7
   speed: 2
-  attackAudioEvent: {fileID: 0}
-  deadthAudioEvent: {fileID: 0}
-  warcryAudioEvent: {fileID: 0}

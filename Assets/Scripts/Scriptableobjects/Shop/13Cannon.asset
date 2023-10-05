@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitPicture: {fileID: 21300000, guid: 8408d9f27ec829545ac0229974a4a9b7, type: 3}
   backgroundPicture: {fileID: 21300000, guid: 276726de27eae224b814f4998f3354e5, type: 3}
-  unitCost: 100
+  unitCost: 50
   unitName: Cannon

@@ -22,5 +22,5 @@ MonoBehaviour:
   attackRatio: 1.5
   damagePerAttack: 2.5
   attackRange: 10
-  hitPoints: 3
+  hitPoints: 6
   speed: 2.5

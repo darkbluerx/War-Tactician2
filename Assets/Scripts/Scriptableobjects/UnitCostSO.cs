@@ -10,17 +10,17 @@ public class UnitCostSO : ScriptableObject
     public float opponentMoneyFactor = 5;
     [Space]
 
-    public float lancerCost = 30;
+    public float lancerCost = 50;
     public float bodyguardCost = 35;
     public float knightCost = 40;
     [Space]
 
-    public float shieldmanCost = 30;
+    public float shieldmanCost = 50;
     public float mediumShielmanCost = 35;
     public float heavyGuardCost = 40;
     [Space]
 
-    public float bowmanCost = 30;
+    public float bowmanCost = 50;
     public float crosbowHunterCost = 35;
     public float handGonneCost = 40;
     [Space]
@@ -30,7 +30,7 @@ public class UnitCostSO : ScriptableObject
     public float lightningCannonCost = 60;
     [Space]
 
-    public float scoutCost = 20;
+    public float scoutCost = 50;
     public float ninjaCost = 25;
     public float samuraiCost = 30;
 

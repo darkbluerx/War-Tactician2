@@ -21,6 +21,6 @@ MonoBehaviour:
   targetType: 1
   attackRatio: 1.5
   damagePerAttack: 2
-  attackRange: 2
-  hitPoints: 6
+  attackRange: 2.5
+  hitPoints: 12
   speed: 3
