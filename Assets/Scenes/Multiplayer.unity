@@ -23044,7 +23044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winAudioEvent: {fileID: 11400000, guid: 7981a0a7167e7174a93fe67eba80282e, type: 2}
   loseAudioEvent: {fileID: 11400000, guid: 7b9c3767048d69a4aa10bb8e8bf8b285, type: 2}
-  backGroundMusicAudioEvent: {fileID: 11400000, guid: 1923b3bc9e957284f90003a64ab81c01,
+  backgroundMusicAudioEvent: {fileID: 11400000, guid: 1923b3bc9e957284f90003a64ab81c01,
     type: 2}
   shopMusicAudioEvent: {fileID: 11400000, guid: ea84898176d816a41ba34518e5cad1e9,
     type: 2}

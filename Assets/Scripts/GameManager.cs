@@ -1,18 +1,13 @@
-using CastleDefence;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 using System;
 
 namespace CastleDefence
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager Instance { get; private set; } //singleton
+        public static GameManager Instance { get; private set; } //Singleton
 
-        //public event EventHandler OnSittingAnimation;
         public event EventHandler OnAngryAnimation;
         public event EventHandler OnClappingAnimation;
         public event EventHandler OnRallyingAnimation;
@@ -20,10 +15,8 @@ namespace CastleDefence
 
         [SerializeField] AudioEvent winAudioEvent;
         [SerializeField] AudioEvent loseAudioEvent;
-        [SerializeField] AudioEvent backGroundMusicAudioEvent;
+        [SerializeField] AudioEvent backgroundMusicAudioEvent;
         [SerializeField] AudioEvent shopMusicAudioEvent;
-
-        SpectatorAnimations specAnimations;
 
         [SerializeField] AudioSource source;
         [Space]
@@ -88,7 +81,7 @@ namespace CastleDefence
         public void PlayGame() //Battle Button
         {
             source.Stop();
-            backGroundMusicAudioEvent.Play(source);
+            backgroundMusicAudioEvent.Play(source);
             gameplayCanvas.SetActive(true);
             shopCanvas.SetActive(false);
             Time.timeScale = 1f;
