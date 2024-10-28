@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CastleDefence
@@ -10,8 +8,7 @@ namespace CastleDefence
     {
         [SerializeField] Animator animator;
         [SerializeField] Unit unit;
-        //[SerializeField] GameManager gameManager;
-
+       
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -41,7 +38,6 @@ namespace CastleDefence
         {
             animator.SetBool("IsAttack", true);
             animator.SetBool("IsRun", false);
- 
         }
 
         public void UnitAnimations_OnDeath(object sender, EventArgs e)

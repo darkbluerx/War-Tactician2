@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class BattleTroopReqruitments2 : MonoBehaviour
 {
-    public static BattleTroopReqruitments2 Instance { get; private set; }
+    public static BattleTroopReqruitments2 Instance { get; private set; } //Singleton
 
     [Header("Player Money/Gold")]
     public int player1Money;
