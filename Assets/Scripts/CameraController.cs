@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,15 +15,30 @@ public class CameraController : MonoBehaviour
     const float Min_follow_y_offset = 2f;
     const float Max_follow_y_offset = 12f;
 
-    [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
+    // Cinemachine 3: kantaluokka kelpaa sekä vanhalle CinemachineVirtualCameralle
+    // että uudelle CinemachineCameralle, joten kohtauksen viittaus säilyy myös CM3-päivityksessä.
+    [SerializeField] CinemachineVirtualCameraBase cinemachineVirtualCamera;
 
-    CinemachineTransposer cinemachineTransposer;
+    CinemachineFollow cinemachineFollow; // CM3:ssa CinemachineTransposer -> CinemachineFollow
     Vector3 targetFollowOffset;
 
     private void Start()
     {
-        cinemachineTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-        targetFollowOffset = cinemachineTransposer.m_FollowOffset;
+        if (cinemachineVirtualCamera == null)
+        {
+            Debug.LogWarning("CameraController: Cinemachine-kameraa ei ole asetettu Inspectorissa.", this);
+            return;
+        }
+
+        cinemachineFollow = cinemachineVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineFollow;
+        if (cinemachineFollow == null)
+        {
+            Debug.LogWarning("CameraController: kamerasta puuttuu CinemachineFollow. Paivita kamera Cinemachine 3:een " +
+                             "(valitse kamera -> Upgrade Now... tai Upgrade Project to Cinemachine 3).", this);
+            return;
+        }
+
+        targetFollowOffset = cinemachineFollow.FollowOffset;
     }
 
     private void FixedUpdate()
@@ -91,6 +106,8 @@ public class CameraController : MonoBehaviour
 
     private void HandleZoom()
     {
+        if (cinemachineFollow == null) return;
+
         float zoomAmount = 1f;
         if (Input.mouseScrollDelta.y > 0f)
         {
@@ -104,7 +121,7 @@ public class CameraController : MonoBehaviour
         targetFollowOffset.y = Mathf.Clamp(targetFollowOffset.y, Min_follow_y_offset, Max_follow_y_offset);
 
         float ZoomSpeed = 5f;
-        cinemachineTransposer.m_FollowOffset =
-            Vector3.Lerp(cinemachineTransposer.m_FollowOffset, targetFollowOffset, Time.deltaTime * ZoomSpeed);
+        cinemachineFollow.FollowOffset =
+            Vector3.Lerp(cinemachineFollow.FollowOffset, targetFollowOffset, Time.deltaTime * ZoomSpeed);
     }
 }

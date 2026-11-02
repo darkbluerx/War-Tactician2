@@ -11,6 +11,7 @@ namespace CastleDefence
         public GameObject healthBarPrefab;
 		public GameObject gameOverUI;
         [SerializeField] GameObject winGameUI;
+        public GameObject WinGameUI => winGameUI;
 
         private List<HealthBar> healthBars;
         private Transform healthBarContainer;

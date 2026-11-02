@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 
 namespace CastleDefence
 {
@@ -23,6 +24,10 @@ namespace CastleDefence
 
         [SerializeField] GameObject gameplayCanvas;
         public GameObject shopCanvas;
+        [Space]
+
+        [Tooltip("Monenko sekunnin päästä häviöstä palataan päävalikkoon.")]
+        [SerializeField] float returnToMenuDelay = 4f;
 
         private void Awake()
         {
@@ -59,7 +64,10 @@ namespace CastleDefence
 
             //Time.timeScale = 0f;
             UIManager.Instance.ShowGameOverUI();
-            gameplayCanvas.SetActive(false); //close shopPanel (UI)
+            // LoseImage on GameplayCanvasin lapsi, joten koko canvasin piilottaminen piilotti myös häviöruudun.
+            // Piilotetaan vain pelin aikaiset napit ja palataan hetken päästä päävalikkoon.
+            HideGameplayButtons(UIManager.Instance.gameOverUI);
+            StartCoroutine(ReturnToMainMenu());
         }
 
         public void WinGame()
@@ -74,7 +82,23 @@ namespace CastleDefence
 
             //Time.timeScale = 0f;
             UIManager.Instance.ShowWinGameUI();
-            //gameplayCanvas.SetActive(false); //close shopPanel (UI)
+            HideGameplayButtons(UIManager.Instance.WinGameUI);
+        }
+
+        //Piilottaa GameplayCanvasin pelin aikaiset napit (BlueShop, RedShop), mutta jättää lopputulosruudun näkyviin
+        private void HideGameplayButtons(GameObject endScreen)
+        {
+            foreach (Transform child in gameplayCanvas.transform)
+            {
+                if (endScreen != null && endScreen.transform.IsChildOf(child)) continue;
+                child.gameObject.SetActive(false);
+            }
+        }
+
+        private IEnumerator ReturnToMainMenu()
+        {
+            yield return new WaitForSecondsRealtime(returnToMenuDelay);
+            Replay(); //load menu
         }
 
         //ShopPanel
