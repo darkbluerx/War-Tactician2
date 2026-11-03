@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,11 +37,13 @@ namespace CastleDefence
 
         private void OnEnable()
         {
-            spearmanButton.onClick.AddListener(() => CostUnit(unitCost.lancerCost, UnitManager.Instance.BuySpearButton));
-            tankButton.onClick.AddListener(() => CostUnit(unitCost.shieldmanCost, UnitManager.Instance.BuyTankButton));
-            rangerButton.onClick.AddListener(() => CostUnit(unitCost.bowmanCost, UnitManager.Instance.BuyRangerButton));
-            cannoneerButton.onClick.AddListener(() => CostUnit(unitCost.cannonCost, UnitManager.Instance.BuyCannoneerButton));
-            scoutButton.onClick.AddListener(() => CostUnit(unitCost.scoutCost, UnitManager.Instance.BuyScoutButton));
+            spearmanButton.onClick.AddListener(() => CostUnit(UnitCostSO.UnitFamily.Lancer, spearmanButton, UnitManager.Instance.BuySpearButton));
+            tankButton.onClick.AddListener(() => CostUnit(UnitCostSO.UnitFamily.Shield, tankButton, UnitManager.Instance.BuyTankButton));
+            rangerButton.onClick.AddListener(() => CostUnit(UnitCostSO.UnitFamily.Bow, rangerButton, UnitManager.Instance.BuyRangerButton));
+            cannoneerButton.onClick.AddListener(() => CostUnit(UnitCostSO.UnitFamily.Cannon, cannoneerButton, UnitManager.Instance.BuyCannoneerButton));
+            scoutButton.onClick.AddListener(() => CostUnit(UnitCostSO.UnitFamily.Scout, scoutButton, UnitManager.Instance.BuyScoutButton));
+
+            RefreshButtonCosts();
         }
 
         private void FixedUpdate()
@@ -74,14 +77,48 @@ namespace CastleDefence
             changeColor = false;
         }
 
-        private void CostUnit(float cost, System.Action buyAction)
+        private void CostUnit(UnitCostSO.UnitFamily family, Button button, System.Action buyAction)
         {
+            float cost = GetCurrentCost(family, button); // the same price the button label shows
+
             if (playerMoney >= cost)
             {
                 buyAction.Invoke();
                 playerMoney -= cost;
                 UpdateMoneyText();
             }
+        }
+
+        // Price of the troop that this gameplay button currently offers (depends on the tier bought in the shop).
+        public float GetCurrentCost(UnitCostSO.UnitFamily family, Button button)
+        {
+            int tier = 0;
+
+            if (BattleTroopReqruitments2.Instance != null && button != null)
+                tier = BattleTroopReqruitments2.Instance.GetDisplayedTier(button.GetComponent<GameplayButton>());
+
+            return unitCost.GetCost(family, tier);
+        }
+
+        // Writes the real recruit price on every gameplay button. Called at start
+        // and again every time the shop changes the troop shown on a button.
+        public void RefreshButtonCosts()
+        {
+            SetButtonCostText(spearmanButton, UnitCostSO.UnitFamily.Lancer);
+            SetButtonCostText(tankButton, UnitCostSO.UnitFamily.Shield);
+            SetButtonCostText(rangerButton, UnitCostSO.UnitFamily.Bow);
+            SetButtonCostText(cannoneerButton, UnitCostSO.UnitFamily.Cannon);
+            SetButtonCostText(scoutButton, UnitCostSO.UnitFamily.Scout);
+        }
+
+        private void SetButtonCostText(Button button, UnitCostSO.UnitFamily family)
+        {
+            if (button == null) return;
+
+            GameplayButton gameplayButton = button.GetComponent<GameplayButton>();
+            if (gameplayButton == null || gameplayButton.unitCostText == null) return;
+
+            gameplayButton.unitCostText.text = GetCurrentCost(family, button).ToString("0.##", CultureInfo.InvariantCulture);
         }
     }
 }

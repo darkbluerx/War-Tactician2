@@ -40,6 +40,9 @@ public class BattleTroopReqruitments2 : MonoBehaviour
 
     bool is2TierPurchased = false;
 
+    // Tier (0 = 1st, 1 = 2nd, 2 = 3rd) that each gameplay button shows right now. PlayerCash reads this to price the troop.
+    readonly int[] displayedTier = new int[5];
+
     private void Awake()
     {
         if (Instance != null) //Singleton pattern
@@ -194,51 +197,35 @@ public class BattleTroopReqruitments2 : MonoBehaviour
         Instantiate(gamePlayButtons[0], gamePlayButtons[0].transform.position, Quaternion.identity);
     }
 
-    private void LoadButtonInffos(int buttonIndex) //Load troop information to the buttons on the Gameplay canvas: images, names and costs
+    private void LoadButtonInffos(int buttonIndex) //Load troop information to the buttons on the Gameplay canvas: images and names. The price comes from PlayerCash (see below)
     {
-        for (int i = 0; i < buttonInffos.Length; i++)
+        int slot = buttonIndex / 3; // 3 tiers per troop type -> index of the gameplay button (0-4)
+
+        if (slot < 0 || slot >= gameplayUnitButtons.Length || slot >= displayedTier.Length) return;
+
+        gameplayUnitButtons[slot].unitNameText.text = buttonInffos[buttonIndex].unitName;
+        gameplayUnitButtons[slot].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
+        gameplayUnitButtons[slot].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
+
+        // buttonInffos[..].unitCost is the SHOP (unlock) price, not the price of recruiting the troop in battle,
+        // so it is not written to the gameplay button. Remember the tier instead and let PlayerCash show the real price.
+        displayedTier[slot] = buttonIndex % 3;
+
+        if (CastleDefence.PlayerCash.Instance != null)
+            CastleDefence.PlayerCash.Instance.RefreshButtonCosts();
+    }
+
+    // Tier (0 = 1st, 1 = 2nd, 2 = 3rd) that the given gameplay button shows. 0 if the button is not one of ours.
+    public int GetDisplayedTier(GameplayButton button)
+    {
+        if (button == null) return 0;
+
+        for (int i = 0; i < gameplayUnitButtons.Length && i < displayedTier.Length; i++)
         {
-            if (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)
-            {
-                //Debug.Log("buttonIndex: " + buttonIndex);
-                gameplayUnitButtons[0].unitNameText.text = buttonInffos[buttonIndex].unitName;
-                gameplayUnitButtons[0].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
-                gameplayUnitButtons[0].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
-                gameplayUnitButtons[0].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
-            }
-
-            if (buttonIndex == 3 || buttonIndex == 4 || buttonIndex == 5)
-            {
-                gameplayUnitButtons[1].unitNameText.text = buttonInffos[buttonIndex].unitName;
-                gameplayUnitButtons[1].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
-                gameplayUnitButtons[1].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
-                gameplayUnitButtons[1].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
-            }
-
-            if (buttonIndex == 6 || buttonIndex == 7 || buttonIndex == 8)
-            {
-                gameplayUnitButtons[2].unitNameText.text = buttonInffos[buttonIndex].unitName;
-                gameplayUnitButtons[2].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
-                gameplayUnitButtons[2].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
-                gameplayUnitButtons[2].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
-            }
-
-            if (buttonIndex == 9 || buttonIndex == 10 || buttonIndex == 11)
-            {
-                gameplayUnitButtons[3].unitNameText.text = buttonInffos[buttonIndex].unitName;
-                gameplayUnitButtons[3].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
-                gameplayUnitButtons[3].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
-                gameplayUnitButtons[3].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
-            }
-
-            if (buttonIndex == 12 || buttonIndex == 13 || buttonIndex == 14)
-            {
-                gameplayUnitButtons[4].unitNameText.text = buttonInffos[buttonIndex].unitName;
-                gameplayUnitButtons[4].unitCostText.text = buttonInffos[buttonIndex].unitCost.ToString();
-                gameplayUnitButtons[4].backgroundImage.sprite = buttonInffos[buttonIndex].backgroundPicture;
-                gameplayUnitButtons[4].unitImage.sprite = buttonInffos[buttonIndex].unitPicture;
-            }
+            if (gameplayUnitButtons[i] == button) return displayedTier[i];
         }
+
+        return 0;
     }
 
     public void LoadUnitInffos() //Load the unit info to the buttons (Shop canvas): images, names and costs
